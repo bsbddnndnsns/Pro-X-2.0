@@ -16,6 +16,7 @@ export const YouTubeShortsDownloader: React.FC<CreditProps> = ({ deductCredits }
   const [videoId, setVideoId] = useState<string | null>(null);
   const [options, setOptions] = useState<VideoOption[]>([]);
   const [downloading, setDownloading] = useState<string | null>(null);
+  const [progress, setProgress] = useState(0);
 
   const COST = 5;
 
@@ -66,14 +67,26 @@ export const YouTubeShortsDownloader: React.FC<CreditProps> = ({ deductCredits }
   };
 
   const handleDownload = (option: VideoOption) => {
+    if (downloading) return;
     setDownloading(option.resolution);
+    setProgress(0);
     
-    // Simulate processing/download preparation
-    setTimeout(() => {
-        setDownloading(null);
-        // Fallback action since we don't have a real backend
-        window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
-    }, 2000);
+    let currentProgress = 0;
+    const interval = setInterval(() => {
+        currentProgress += 5;
+        if (currentProgress > 100) currentProgress = 100;
+        
+        setProgress(currentProgress);
+
+        if (currentProgress >= 100) {
+            clearInterval(interval);
+            setTimeout(() => {
+                setDownloading(null);
+                setProgress(0);
+                window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+            }, 500);
+        }
+    }, 100);
   };
 
   return (
@@ -161,33 +174,45 @@ export const YouTubeShortsDownloader: React.FC<CreditProps> = ({ deductCredits }
             </div>
 
             <div className="grid gap-3">
-                {options.map((opt, idx) => (
-                    <button 
-                        key={idx}
-                        onClick={() => handleDownload(opt)}
-                        disabled={!!downloading}
-                        className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-red-500/30 transition-all group active:scale-[0.98]"
-                    >
-                        <div className="flex items-center gap-4">
-                            <div className={`p-3 rounded-lg ${opt.type === 'audio' ? 'bg-indigo-500/10 text-indigo-400' : 'bg-red-500/10 text-red-500'} group-hover:scale-110 transition-transform`}>
-                                {downloading === opt.resolution ? (
-                                    <Loader2 size={24} className="animate-spin" />
-                                ) : opt.type === 'audio' ? (
-                                    <Music size={24} />
-                                ) : (
-                                    <FileVideo size={24} />
-                                )}
+                {options.map((opt, idx) => {
+                    const isDownloadingThis = downloading === opt.resolution;
+                    return (
+                        <button 
+                            key={idx}
+                            onClick={() => handleDownload(opt)}
+                            disabled={!!downloading}
+                            className={`relative overflow-hidden flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5 transition-all group active:scale-[0.98] ${!downloading ? 'hover:bg-white/10 hover:border-red-500/30' : ''}`}
+                        >
+                            {/* Progress Bar Background */}
+                            {isDownloadingThis && (
+                                <div 
+                                    className="absolute bottom-0 left-0 h-1 bg-red-500 z-20 transition-all duration-100 ease-linear"
+                                    style={{ width: `${progress}%` }}
+                                ></div>
+                            )}
+
+                            <div className="flex items-center gap-4 relative z-10">
+                                <div className={`p-3 rounded-lg ${opt.type === 'audio' ? 'bg-indigo-500/10 text-indigo-400' : 'bg-red-500/10 text-red-500'} group-hover:scale-110 transition-transform`}>
+                                    {isDownloadingThis ? (
+                                        <Loader2 size={24} className="animate-spin" />
+                                    ) : opt.type === 'audio' ? (
+                                        <Music size={24} />
+                                    ) : (
+                                        <FileVideo size={24} />
+                                    )}
+                                </div>
+                                <div className="text-left">
+                                    <div className="font-bold text-white">{opt.resolution}</div>
+                                    <div className="text-xs text-slate-400">{opt.format} • {opt.size}</div>
+                                </div>
                             </div>
-                            <div className="text-left">
-                                <div className="font-bold text-white">{opt.resolution}</div>
-                                <div className="text-xs text-slate-400">{opt.format} • {opt.size}</div>
+                            
+                            <div className={`relative z-10 px-4 py-2 rounded-lg text-sm font-medium transition-colors min-w-[100px] text-center ${isDownloadingThis ? 'bg-red-500/20 text-red-400' : 'bg-white/5 text-slate-300 group-hover:bg-red-600 group-hover:text-white'}`}>
+                                {isDownloadingThis ? `${progress}%` : 'Download'}
                             </div>
-                        </div>
-                        <div className="px-4 py-2 bg-white/5 rounded-lg text-sm font-medium text-slate-300 group-hover:bg-red-600 group-hover:text-white transition-colors">
-                            {downloading === opt.resolution ? 'Converting...' : 'Download'}
-                        </div>
-                    </button>
-                ))}
+                        </button>
+                    );
+                })}
             </div>
 
             <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 text-sm text-red-200 backdrop-blur-sm flex items-start gap-3">

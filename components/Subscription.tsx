@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Check, Crown, Zap, Shield, Star, Play, X, Loader2, CheckCircle2, CreditCard, Wallet } from 'lucide-react';
+import { SubscriptionProps } from '../types';
 
-export const Subscription: React.FC = () => {
+export const Subscription: React.FC<SubscriptionProps> = ({ onUpgrade }) => {
   const [selectedPlan, setSelectedPlan] = useState<any>(null);
   const [paymentStatus, setPaymentStatus] = useState<'idle' | 'processing' | 'success'>('idle');
 
@@ -65,6 +66,7 @@ export const Subscription: React.FC = () => {
     // Simulate API call to Google Play Billing
     setTimeout(() => {
       setPaymentStatus('success');
+      onUpgrade(selectedPlan.name);
     }, 2500);
   };
 
@@ -250,6 +252,7 @@ export const Subscription: React.FC = () => {
 
             <button
               onClick={() => handleUpgrade(plan)}
+              disabled={plan.current}
               className={`
                 w-full py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-2
                 ${plan.current 

@@ -1,4 +1,4 @@
-import { LayoutDashboard, Image, Youtube, Instagram, Palette, Film, Crown, Coins } from 'lucide-react';
+import { LayoutDashboard, Image, Youtube, Instagram, Palette, Film, Crown, Coins, PenTool, Smartphone } from 'lucide-react';
 import { NavItem } from './types';
 
 export const APP_NAME = "Pro X 2.0";
@@ -23,6 +23,12 @@ export const TOOLS: NavItem[] = [
     description: 'Complete tasks and refer friends to earn free credits'
   },
   {
+    id: 'branding',
+    label: 'Branding Studio',
+    icon: PenTool,
+    description: 'Create YouTube Banners and Professional Logos'
+  },
+  {
     id: 'image-gen',
     label: 'AI Image Generator',
     icon: Palette,
@@ -41,8 +47,14 @@ export const TOOLS: NavItem[] = [
     description: 'Download Instagram Reels and Videos'
   },
   {
+    id: 'youtube-shorts',
+    label: 'Shorts Downloader',
+    icon: Smartphone,
+    description: 'Download viral YouTube Shorts videos'
+  },
+  {
     id: 'youtube',
-    label: 'YouTube Asset Grabber',
+    label: 'Thumbnail Downloader',
     icon: Youtube,
     description: 'Download Ultra HD thumbnails from any YouTube video'
   },

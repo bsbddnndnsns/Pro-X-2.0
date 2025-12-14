@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Facebook, Youtube, ShieldCheck, Loader2, Lock } from 'lucide-react';
+import { Sparkles, Facebook, Mail, ShieldCheck, Loader2, Lock } from 'lucide-react';
 import { APP_NAME } from '../constants';
 import { AuthProps } from '../types';
 
@@ -64,8 +64,8 @@ export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
             <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4 border border-white/10">
                <Lock className="text-indigo-400" size={32} />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-2">Account Required</h3>
-            <p className="text-slate-400">Connect your social account to continue to the online system.</p>
+            <h3 className="text-2xl font-bold text-white mb-2">Google Account Required</h3>
+            <p className="text-slate-400">Sign in with your Google Email to access the app.</p>
           </div>
 
           <div className="space-y-4">
@@ -78,8 +78,8 @@ export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
                 <Loader2 className="animate-spin text-slate-900" />
               ) : (
                 <>
-                  <Youtube className="text-red-600" size={24} />
-                  <span>Continue with YouTube</span>
+                  <Mail className="text-red-600" size={24} />
+                  <span>Continue with Google</span>
                 </>
               )}
             </button>
@@ -101,7 +101,7 @@ export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
             
             <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4 mt-6">
                 <p className="text-yellow-200 text-xs text-center">
-                    Note: Login is mandatory to sync your Credits and Generation History with our online servers.
+                    Note: A valid Google Account is required to sync your Credits and Generation History.
                 </p>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type ToolType = 'dashboard' | 'youtube' | 'background' | 'instagram' | 'image-gen' | 'instagram-reels' | 'subscription' | 'earn';
+export type ToolType = 'dashboard' | 'youtube' | 'youtube-shorts' | 'background' | 'instagram' | 'image-gen' | 'instagram-reels' | 'subscription' | 'earn' | 'branding' | 'profile';
 
 export interface NavItem {
   id: ToolType;
@@ -34,8 +34,13 @@ export interface User {
   email: string;
   avatar: string;
   provider: 'google' | 'facebook' | 'email';
+  plan?: string;
 }
 
 export interface AuthProps {
   onLogin: (provider: 'google' | 'facebook') => void;
+}
+
+export interface SubscriptionProps {
+  onUpgrade: (planName: string) => void;
 }

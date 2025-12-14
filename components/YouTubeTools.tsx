@@ -62,9 +62,9 @@ export const YouTubeTools: React.FC<CreditProps> = ({ deductCredits }) => {
           <div className="p-2 bg-red-500/10 rounded-xl border border-red-500/20">
             <Youtube className="text-red-500" size={32} />
           </div>
-          YouTube Asset Grabber
+          Thumbnail Downloader
         </h2>
-        <p className="text-slate-400 text-lg">Paste a video URL to extract the Ultra HD (MaxRes) thumbnail instantly.</p>
+        <p className="text-slate-400 text-lg">Paste a video URL to download the Ultra HD (MaxRes) thumbnail instantly.</p>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4">

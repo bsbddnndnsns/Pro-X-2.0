@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Coins, Crown, Sparkles, Zap } from 'lucide-react';
+import { ArrowRight, Coins, Crown, Sparkles, Zap, Smartphone, Image as ImageIcon, Film } from 'lucide-react';
 import { TOOLS, APP_NAME } from '../constants';
 import { ToolType } from '../types';
 
@@ -55,51 +55,67 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         </h2>
         <div className="grid md:grid-cols-2 gap-6">
           
-          {/* Earning System Update */}
-          <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-            <div className="p-2 bg-amber-500/10 rounded-lg text-amber-400 mt-1 border border-amber-500/20">
+          {/* New Tool Update - Shorts */}
+           <div 
+            className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors cursor-pointer group"
+            onClick={() => onNavigate('youtube-shorts')}
+           >
+            <div className="p-2 bg-red-500/10 rounded-lg text-red-400 mt-1 border border-red-500/20 group-hover:bg-red-500/20 transition-colors">
+               <Smartphone size={20} />
+            </div>
+            <div>
+              <h4 className="font-semibold text-slate-200 group-hover:text-white transition-colors">New: Shorts Downloader</h4>
+              <p className="text-sm text-slate-400 mt-1">
+                Download viral YouTube Shorts in HD. Extract audio or video instantly. <span className="text-red-400 font-bold ml-1 text-xs">TRY NOW &rarr;</span>
+              </p>
+            </div>
+          </div>
+
+          {/* Background Studio Update */}
+          <div 
+            className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors cursor-pointer group"
+            onClick={() => onNavigate('background')}
+          >
+            <div className="p-2 bg-indigo-500/10 rounded-lg text-indigo-400 mt-1 border border-indigo-500/20 group-hover:bg-indigo-500/20 transition-colors">
+               <ImageIcon size={20} />
+            </div>
+            <div>
+              <h4 className="font-semibold text-slate-200 group-hover:text-white">Background Studio 2.0</h4>
+              <p className="text-sm text-slate-400 mt-1">
+                Now powered by Gemini 2.5 Flash. Processing is 2x faster with improved edge detection.
+              </p>
+            </div>
+          </div>
+
+          {/* Instagram Reels Update */}
+          <div 
+            className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors cursor-pointer group"
+            onClick={() => onNavigate('instagram-reels')}
+          >
+            <div className="p-2 bg-pink-500/10 rounded-lg text-pink-400 mt-1 border border-pink-500/20 group-hover:bg-pink-500/20">
+               <Film size={20} />
+            </div>
+            <div>
+              <h4 className="font-semibold text-slate-200 group-hover:text-white">Instagram Tools</h4>
+              <p className="text-sm text-slate-400 mt-1">
+                Download Reels seamlessly and generate viral captions in one place.
+              </p>
+            </div>
+          </div>
+
+          {/* Boosted Rewards Update */}
+          <div 
+            className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors cursor-pointer group"
+            onClick={() => onNavigate('earn')}
+          >
+            <div className="p-2 bg-amber-500/10 rounded-lg text-amber-400 mt-1 border border-amber-500/20 group-hover:bg-amber-500/20">
                <Coins size={20} />
             </div>
             <div>
-              <h4 className="font-semibold text-slate-200">New Earning System</h4>
+              <h4 className="font-semibold text-slate-200 group-hover:text-white">Daily Rewards</h4>
               <p className="text-sm text-slate-400 mt-1">
-                Complete daily tasks and invite friends to earn free credits. Check your balance in the <span className="text-amber-400 cursor-pointer hover:underline" onClick={() => onNavigate('earn')}>Earn tab</span>.
+                Don't forget to claim your daily login bonus. New streak rewards available! <span className="text-amber-400 font-bold ml-1 text-xs">CLAIM &rarr;</span>
               </p>
-            </div>
-          </div>
-
-          {/* Subscription Update */}
-          <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-            <div className="p-2 bg-indigo-500/10 rounded-lg text-indigo-400 mt-1 border border-indigo-500/20">
-               <Crown size={20} />
-            </div>
-            <div>
-              <h4 className="font-semibold text-slate-200">Pocket-Friendly Pro Plans</h4>
-              <p className="text-sm text-slate-400 mt-1">
-                Unlock unlimited power starting at just <span className="text-white font-bold">₹49/month</span>. Perfect for creators on a budget.
-              </p>
-            </div>
-          </div>
-
-          {/* Visual Update */}
-          <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-            <div className="p-2 bg-purple-500/10 rounded-lg text-purple-400 mt-1 border border-purple-500/20">
-               <Sparkles size={20} />
-            </div>
-            <div>
-              <h4 className="font-semibold text-slate-200">Visual Overhaul</h4>
-              <p className="text-sm text-slate-400 mt-1">Experience our new high-tech sharp grid background for a cleaner, modern look that reduces eye strain.</p>
-            </div>
-          </div>
-
-           {/* Core Update */}
-           <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-            <div className="p-2 bg-green-500/10 rounded-lg text-green-400 mt-1 border border-green-500/20">
-               <Zap size={20} />
-            </div>
-            <div>
-              <h4 className="font-semibold text-slate-200">Faster Generation</h4>
-              <p className="text-sm text-slate-400 mt-1">Optimized Gemini 2.5 Flash integration for 2x faster image processing and caption generation.</p>
             </div>
           </div>
 
